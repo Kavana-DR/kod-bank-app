@@ -50,45 +50,57 @@ export default function LoginPage() {
             KB
           </span>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 dark:text-sky-300">Kodbank</p>
-            <p className="text-sm text-slate-600 dark:text-slate-300">Trusted digital banking</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-200">Kodbank</p>
+            <p className="text-sm text-slate-300">Trusted digital banking</p>
           </div>
         </div>
-        <h1 className="mt-5 text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl">Welcome back</h1>
+        <h1 className="mt-5 text-4xl font-bold tracking-tight text-white">Welcome back</h1>
 
         <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
-          <input
-            className="auth-input"
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
-          />
-          <input
-            className="auth-input"
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
-          />
+          <div className="input-with-icon">
+            <svg className="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M20 21a8 8 0 0 0-16 0" />
+              <circle cx="12" cy="8" r="4" />
+            </svg>
+            <input
+              className="auth-input"
+              name="username"
+              placeholder="Username"
+              value={username}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
+            />
+          </div>
+          <div className="input-with-icon">
+            <svg className="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <rect x="4" y="11" width="16" height="9" rx="2" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 11V8a4 4 0 0 1 8 0v3" />
+            </svg>
+            <input
+              className="auth-input"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
+            />
+          </div>
 
-          {error && <p className="text-sm text-rose-600 dark:text-rose-300">{error}</p>}
+          {error && <p className="text-sm text-rose-300">{error}</p>}
 
           <button className="auth-button" disabled={loading} type="submit">
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-slate-700 dark:text-slate-300">
-          <Link className="font-semibold text-sky-700 underline decoration-sky-400/80 dark:text-sky-300 dark:decoration-sky-300/80" href="/forgot-password">
+        <p className="mt-4 text-sm text-slate-300">
+          <Link className="font-semibold text-blue-200 underline decoration-blue-300/80 hover:text-white" href="/forgot-password">
             Forgot Password?
           </Link>
         </p>
 
-        <p className="mt-6 text-sm text-slate-700 dark:text-slate-300">
+        <p className="mt-6 text-sm text-slate-300">
           Need an account?{" "}
-          <Link className="font-semibold text-sky-700 underline decoration-sky-400/80 dark:text-sky-300 dark:decoration-sky-300/80" href="/register">
+          <Link className="font-semibold text-blue-200 underline decoration-blue-300/80 hover:text-white" href="/register">
             Register
           </Link>
         </p>

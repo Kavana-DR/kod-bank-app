@@ -71,9 +71,9 @@ export default function DashboardPage() {
       </div>
 
       <section className="auth-card dashboard-card">
-        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 dark:text-sky-300">Kodbank Dashboard</p>
-        <h1 className="mt-2 text-3xl font-semibold text-slate-900 dark:text-slate-100">Banking at a glance</h1>
-        <p className="mt-2 text-slate-600 dark:text-slate-300">
+        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-200">Kodbank Dashboard</p>
+        <h1 className="mt-2 text-4xl font-bold tracking-tight text-white">Banking at a glance</h1>
+        <p className="mt-2 text-slate-300">
           Click below to securely verify your JWT token and fetch the latest balance.
         </p>
 
@@ -83,8 +83,8 @@ export default function DashboardPage() {
           </button>
         </div>
 
-        {message && <p className="mt-6 rounded-xl bg-emerald-500/15 p-4 text-emerald-800 dark:bg-emerald-400/20 dark:text-emerald-200">{message}</p>}
-        {error && <p className="mt-6 rounded-xl bg-rose-500/15 p-4 text-rose-700 dark:bg-rose-400/20 dark:text-rose-200">{error}</p>}
+        {message && <p className="mt-6 rounded-xl bg-emerald-400/20 p-4 text-emerald-200">{message}</p>}
+        {error && <p className="mt-6 rounded-xl bg-rose-400/20 p-4 text-rose-200">{error}</p>}
       </section>
     </main>
   );
