@@ -2,36 +2,42 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import type { ChangeEvent, FormEvent } from "react";
 
-export default function LoginPage() {
-  const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export default function ForgotPasswordPage() {
+  const [email, setEmail] = useState("");
+  const [resetLink, setResetLink] = useState("");
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
+    setMessage("");
+    setResetLink("");
     setLoading(true);
 
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("/api/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email }),
       });
 
-      const data = await response.json();
+      const data = (await response.json()) as {
+        message?: string;
+        resetLink?: string;
+        error?: string;
+      };
 
       if (!response.ok) {
-        setError(data.error || "Login failed.");
+        setError(data.error || "Failed to generate reset link.");
         return;
       }
 
-      router.push("/dashboard");
+      setMessage(data.message || "Reset link generated");
+      setResetLink(data.resetLink || "");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -46,42 +52,39 @@ export default function LoginPage() {
 
       <section className="relative z-10 w-full max-w-md rounded-3xl border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
         <p className="text-sm uppercase tracking-[0.2em] text-emerald-200/90">Kodbank</p>
-        <h1 className="mt-2 text-3xl font-semibold text-white">Welcome back</h1>
+        <h1 className="mt-2 text-3xl font-semibold text-white">Forgot password</h1>
 
         <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
           <input
             className="auth-input"
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)}
-          />
-          <input
-            className="auth-input"
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={email}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
           />
 
           {error && <p className="text-sm text-rose-300">{error}</p>}
+          {message && <p className="text-sm text-emerald-300">{message}</p>}
+
+          {resetLink && (
+            <p className="break-all rounded-lg bg-white/10 p-3 text-sm text-cyan-200">
+              <span className="font-semibold text-cyan-100">Reset Link:</span>{" "}
+              <Link className="underline" href={resetLink}>
+                {resetLink}
+              </Link>
+            </p>
+          )}
 
           <button className="auth-button" disabled={loading} type="submit">
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Generating..." : "Generate Reset Link"}
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-emerald-100/90">
-          <Link className="font-semibold text-white underline decoration-emerald-300/70" href="/forgot-password">
-            Forgot Password?
-          </Link>
-        </p>
-
         <p className="mt-6 text-sm text-emerald-100/90">
-          Need an account?{" "}
-          <Link className="font-semibold text-white underline decoration-emerald-300/70" href="/register">
-            Register
+          Back to{" "}
+          <Link className="font-semibold text-white underline decoration-emerald-300/70" href="/login">
+            Login
           </Link>
         </p>
       </section>
