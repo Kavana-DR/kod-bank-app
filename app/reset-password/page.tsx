@@ -1,9 +1,5 @@
-import ResetPasswordForm from "./reset-password-form";
+export const dynamic = "force-dynamic";
 
-export default function ResetPasswordPage({
-  searchParams,
-}: {
-  searchParams: { token?: string };
-}) {
-  return <ResetPasswordForm token={searchParams?.token} />;
+export default function ResetPasswordPage() {
+  return <div>Reset Password Page</div>;
 }
