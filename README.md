@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kodbank
 
-## Getting Started
+Full-stack App Router banking demo with registration, JWT login, protected dashboard, and MySQL persistence.
 
-First, run the development server:
+## Stack
+
+- Next.js (App Router)
+- Tailwind CSS
+- MySQL (`mysql2`)
+- JWT (`jsonwebtoken`)
+- Password hashing (`bcryptjs`)
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create env file:
+
+```bash
+cp .env.example .env.local
+```
+
+3. Fill in your Aiven MySQL credentials and `JWT_SECRET` in `.env.local`.
+
+4. Create tables:
+
+```sql
+-- run db/schema.sql in your MySQL database
+```
+
+5. Run dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `/register`: register user (`role=customer`, `balance=10000`, hashed password)
+- `/login`: login and issue JWT (HS256, subject=username, role claim)
+- `/dashboard`: protected page with `Check Balance` button and animated confetti background
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## API
 
-## Learn More
+- `POST /api/register`
+- `POST /api/login`
+- `GET /api/balance`
+- `POST /api/logout`
 
-To learn more about Next.js, take a look at the following resources:
+## Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Auth cookie key: `kodbank_token` (HTTP-only)
+- Token expiry: 1 day
+- `UserToken` table stores JWT and expiry per login
