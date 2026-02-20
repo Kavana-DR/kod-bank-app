@@ -1,6 +1,10 @@
 import jwt, { type JwtPayload } from "jsonwebtoken";
 
-const jwtSecret = process.env.JWT_SECRET;
+const jwtSecret = process.env.JWT_SECRET as string;
+
+if (!jwtSecret) {
+  throw new Error("JWT_SECRET is not defined");
+}
 
 if (!jwtSecret) {
   throw new Error("Missing required environment variable: JWT_SECRET");
@@ -19,9 +23,20 @@ export function generateToken(username: string, role: string): string {
 }
 
 export function verifyToken(token: string): KodbankJwtPayload {
-  return jwt.verify(token, jwtSecret, {
+  const decoded = jwt.verify(token, jwtSecret, {
     algorithms: ["HS256"],
-  }) as KodbankJwtPayload;
+  });
+
+  if (
+    typeof decoded !== "object" ||
+    decoded === null ||
+    !("role" in decoded) ||
+    typeof decoded.role !== "string"
+  ) {
+    throw new Error("Invalid token payload");
+  }
+
+  return decoded as KodbankJwtPayload;
 }
 
 export function oneDayFromNow(): Date {
