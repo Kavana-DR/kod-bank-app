@@ -40,13 +40,21 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-4 py-12">
+    <main className="auth-screen">
       <div className="hero-glow hero-glow-left" />
       <div className="hero-glow hero-glow-right" />
 
-      <section className="relative z-10 w-full max-w-md rounded-3xl border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
-        <p className="text-sm uppercase tracking-[0.2em] text-emerald-200/90">Kodbank</p>
-        <h1 className="mt-2 text-3xl font-semibold text-white">Welcome back</h1>
+      <section className="auth-card">
+        <div className="flex items-center gap-3">
+          <span className="brand-logo" aria-hidden>
+            KB
+          </span>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 dark:text-sky-300">Kodbank</p>
+            <p className="text-sm text-slate-600 dark:text-slate-300">Trusted digital banking</p>
+          </div>
+        </div>
+        <h1 className="mt-5 text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl">Welcome back</h1>
 
         <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
           <input
@@ -65,22 +73,22 @@ export default function LoginPage() {
             onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
           />
 
-          {error && <p className="text-sm text-rose-300">{error}</p>}
+          {error && <p className="text-sm text-rose-600 dark:text-rose-300">{error}</p>}
 
           <button className="auth-button" disabled={loading} type="submit">
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        <p className="mt-4 text-sm text-emerald-100/90">
-          <Link className="font-semibold text-white underline decoration-emerald-300/70" href="/forgot-password">
+        <p className="mt-4 text-sm text-slate-700 dark:text-slate-300">
+          <Link className="font-semibold text-sky-700 underline decoration-sky-400/80 dark:text-sky-300 dark:decoration-sky-300/80" href="/forgot-password">
             Forgot Password?
           </Link>
         </p>
 
-        <p className="mt-6 text-sm text-emerald-100/90">
+        <p className="mt-6 text-sm text-slate-700 dark:text-slate-300">
           Need an account?{" "}
-          <Link className="font-semibold text-white underline decoration-emerald-300/70" href="/register">
+          <Link className="font-semibold text-sky-700 underline decoration-sky-400/80 dark:text-sky-300 dark:decoration-sky-300/80" href="/register">
             Register
           </Link>
         </p>

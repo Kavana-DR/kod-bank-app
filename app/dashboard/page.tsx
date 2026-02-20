@@ -52,7 +52,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#031b24] px-4 py-12">
+    <main className="auth-screen">
       <div className="hero-glow hero-glow-left" />
       <div className="hero-glow hero-glow-right" />
 
@@ -70,10 +70,10 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      <section className="relative z-10 w-full max-w-lg rounded-3xl border border-white/20 bg-white/10 p-8 text-white shadow-2xl backdrop-blur-xl">
-        <p className="text-sm uppercase tracking-[0.2em] text-teal-200/90">Kodbank Dashboard</p>
-        <h1 className="mt-2 text-3xl font-semibold">Banking at a glance</h1>
-        <p className="mt-2 text-teal-100/90">
+      <section className="auth-card dashboard-card">
+        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 dark:text-sky-300">Kodbank Dashboard</p>
+        <h1 className="mt-2 text-3xl font-semibold text-slate-900 dark:text-slate-100">Banking at a glance</h1>
+        <p className="mt-2 text-slate-600 dark:text-slate-300">
           Click below to securely verify your JWT token and fetch the latest balance.
         </p>
 
@@ -83,8 +83,8 @@ export default function DashboardPage() {
           </button>
         </div>
 
-        {message && <p className="mt-6 rounded-xl bg-emerald-500/25 p-4 text-emerald-100">{message}</p>}
-        {error && <p className="mt-6 rounded-xl bg-rose-500/20 p-4 text-rose-100">{error}</p>}
+        {message && <p className="mt-6 rounded-xl bg-emerald-500/15 p-4 text-emerald-800 dark:bg-emerald-400/20 dark:text-emerald-200">{message}</p>}
+        {error && <p className="mt-6 rounded-xl bg-rose-500/15 p-4 text-rose-700 dark:bg-rose-400/20 dark:text-rose-200">{error}</p>}
       </section>
     </main>
   );

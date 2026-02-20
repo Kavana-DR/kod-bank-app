@@ -49,13 +49,13 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-4 py-12">
+    <main className="auth-screen">
       <div className="hero-glow hero-glow-left" />
       <div className="hero-glow hero-glow-right" />
 
-      <section className="relative z-10 w-full max-w-md rounded-3xl border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
-        <p className="text-sm uppercase tracking-[0.2em] text-cyan-200/90">Kodbank</p>
-        <h1 className="mt-2 text-3xl font-semibold text-white">Create account</h1>
+      <section className="auth-card">
+        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 dark:text-sky-300">Kodbank</p>
+        <h1 className="mt-2 text-3xl font-semibold text-slate-900 dark:text-slate-100">Create account</h1>
 
         <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
           <input
@@ -89,16 +89,16 @@ export default function RegisterPage() {
             onChange={handleChange}
           />
 
-          {error && <p className="text-sm text-rose-300">{error}</p>}
+          {error && <p className="text-sm text-rose-600 dark:text-rose-300">{error}</p>}
 
           <button className="auth-button" disabled={loading} type="submit">
             {loading ? "Creating..." : "Register"}
           </button>
         </form>
 
-        <p className="mt-6 text-sm text-cyan-100/90">
+        <p className="mt-6 text-sm text-slate-700 dark:text-slate-300">
           Already have an account?{" "}
-          <Link className="font-semibold text-white underline decoration-cyan-300/70" href="/login">
+          <Link className="font-semibold text-sky-700 underline decoration-sky-400/80 dark:text-sky-300 dark:decoration-sky-300/80" href="/login">
             Login
           </Link>
         </p>
